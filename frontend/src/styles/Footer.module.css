@@ -1,0 +1,28 @@
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    /* margin-top: 2rem; */
+  }
+  
+  .footerLinks {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footerLinks a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .footerLinks a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ccc;
+  }

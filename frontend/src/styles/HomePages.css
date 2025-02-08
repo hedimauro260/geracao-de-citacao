@@ -1,0 +1,55 @@
+.header {
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.logo a {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #333;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+}
+
+.navbar ul li {
+    display: flex;
+    align-items: center;
+}
+
+.navbar ul li a {
+    display: inline-block;
+    width: 10rem;
+    text-align: center;
+    padding: 0.6rem 0;
+    border: 1px solid #000;
+    border-radius: 1rem;
+    color: #333;
+    font-weight: 300;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.navbar ul .active {
+    background-color: #333;
+    color: #fff;
+}
+
+.navbar ul li:hover a {
+    background-color: #333;
+    color: #fff;
+}
+
+.login a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.2rem;
+    color: #333;
+    
+}

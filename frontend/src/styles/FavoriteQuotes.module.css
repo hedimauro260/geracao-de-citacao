@@ -1,0 +1,37 @@
+.favoriteQuotes {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .favoriteQuotes h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .favoriteQuotes ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .favoriteQuoteItem {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+  }
+  
+  .favoriteQuoteText {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #555;
+  }
+  
+  .favoriteQuoteAuthor {
+    text-align: right;
+    font-weight: bold;
+    color: #777;
+  }
