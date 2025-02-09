@@ -70,7 +70,7 @@ Este projeto permite que os usuários escolham seu estado de espírito e recebam
 
 4. **Acesse a aplicação:**  
    - O frontend rodará em `http://localhost:5173` (ou outra porta definida pelo Vite).  
-   - O backend rodará em `http://localhost:3000` (ou a porta definida no código).  
+   - O backend rodará em `http://localhost:5000` (ou a porta definida no código).  
 
 ## 🛠 Tecnologias Utilizadas  
 ### **Frontend**  
