@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  username    String         @unique
+  email       String         @unique
+  password    String
+  quotes      Quote[]        // Quotes criados pelo usuário
+  favorites   FavoriteQuote[] // Quotes favoritos do usuário
+}
+
+model Quote {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  text        String
+  author      String
+  mood        String
+  userId      String?        @db.ObjectId // Pode ser nulo (quotes do admin)
+  user        User?          @relation(fields: [userId], references: [id])
+  isAdmin     Boolean        @default(false) // Indica se o quote foi adicionado pelo admin
+  favorites   FavoriteQuote[] // Relação com os favoritos
+}
+
+model FavoriteQuote {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String         @db.ObjectId
+  user        User           @relation(fields: [userId], references: [id])
+  quoteId     String         @db.ObjectId
+  quote       Quote          @relation(fields: [quoteId], references: [id])
+  createdAt   DateTime       @default(now())
+}
