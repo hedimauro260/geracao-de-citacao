@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import QuoteCard from '../components/QuoteCard';
@@ -11,7 +11,7 @@ interface Quote {
 }
 
 const HomePage: React.FC = () => {
-  const [selectedMood, setSelectedMood] = useState<string>('');
+  const [selectedMood, setSelectedMood] = useState<string>('Motivado');
   const [quote, setQuote] = useState<Quote>({ text: '', author: '' });
   const [favorites, setFavorites] = useState<Quote[]>([]);
   
@@ -21,27 +21,27 @@ const HomePage: React.FC = () => {
     { name: 'Filosófico', icon: '📜' },
   ];
 
-  const quotesByMood: { [key: string]: Quote[] } = {
-    Motivado: [
-      { text: 'A persistência é o caminho do êxito.', author: 'Charles Chaplin' },
-      { text: 'O sucesso é a soma de pequenos esforços repetidos dia após dia.', author: 'Robert Collier' },
-    ],
-    Reflexivo: [
-      { text: 'A vida é 10% o que acontece comigo e 90% como eu reajo a isso.', author: 'Charles Swindoll' },
-      { text: 'Conhece-te a ti mesmo e conhecerás o universo.', author: 'Sócrates' },
-    ],
-    Filosófico: [
-      { text: 'Penso, logo existo.', author: 'René Descartes' },
-      { text: 'A única coisa que sei é que nada sei.', author: 'Sócrates' },
-    ],
-  };
-
   const handleMoodChange = (mood: string) => {
     setSelectedMood(mood);
     generateQuote(mood);
   };
 
-  const generateQuote = (mood: string) => {
+  const generateQuote = useCallback((mood: string) => {
+    const quotesByMood: { [key: string]: Quote[] } = {
+      Motivado: [
+        { text: 'A persistência é o caminho do êxito.', author: 'Charles Chaplin' },
+        { text: 'O sucesso é a soma de pequenos esforços repetidos dia após dia.', author: 'Robert Collier' },
+      ],
+      Reflexivo: [
+        { text: 'A vida é 10% o que acontece comigo e 90% como eu reajo a isso.', author: 'Charles Swindoll' },
+        { text: 'Conhece-te a ti mesmo e conhecerás o universo.', author: 'Sócrates' },
+      ],
+      Filosófico: [
+        { text: 'Penso, logo existo.', author: 'René Descartes' },
+        { text: 'A única coisa que sei é que nada sei.', author: 'Sócrates' },
+      ],
+    };
+
     const quotes = quotesByMood[mood];
     if (quotes && quotes.length > 0) {
       const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
@@ -49,7 +49,11 @@ const HomePage: React.FC = () => {
     } else {
       setQuote({ text: 'Nenhuma citação disponível para este estado.', author: '' });
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    generateQuote(selectedMood); // Gera uma citação assim que a página carrega
+  }, [generateQuote, selectedMood]);
 
   const addToFavorites = () => {
     if (quote.text) {
