@@ -14,3 +14,13 @@
 html{
     font-size: 62.5%;
 }
+
+:root {
+    /* main color */
+    --color-01: #ffffff;
+    --color-02: #7454d9;
+    --color-03: #333;
+    /* secundary color */
+    --color-04: #8f76e0;
+    --color-05: #000000;
+}

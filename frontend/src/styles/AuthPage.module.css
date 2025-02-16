@@ -1,0 +1,104 @@
+.authPage {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-02); 
+}
+
+.container {
+    width: 60%;
+    height: 80vh;
+    display: flex;
+    background-color: var(--color-04);
+    border-radius: 2rem;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+}
+
+/* Formulário Container */
+.formsContainer {
+    width: 40%;
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-01);
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+}
+/* Header do Formulário */
+.formHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formHeader h2 {
+    font-size: 2.8rem;
+    color: var(--color-03);
+}
+
+.formHeader span {
+    margin-right: 0.5rem;
+    color: var(--color-02);
+}
+
+.formHeader p {
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--color-03);
+}
+
+/* Toggle Button */
+.toggleButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+.toggleButtons button {
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    color: var(--color-03);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggleButtons button.active {
+    background-color: var(--color-02);
+    color: var(--color-01);
+}
+
+.toggleButtons button:hover {
+    background-color: var(--color-04);
+    color: var(--color-01);
+}
+
+.divisor {
+    width: 100%;
+    height: 0.1rem;
+    margin: 2rem auto;
+    background-color: #ccc;
+}
+
+/* Formulário: login/signup */
+.formContent {
+    width: 100%;
+}
+
+/* Paineis */
+.panelContainer {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
