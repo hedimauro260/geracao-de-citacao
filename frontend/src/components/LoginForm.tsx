@@ -1,21 +1,35 @@
 import React, { useState } from 'react';
+import { login } from "../services/authService";
 import styles from '../styles/LoginForm.module.css';
 
 interface LoginFormProps {
-    onLogin: (email: string, password: string) => void;
+    onToggleMode: () => void; // Propriedade para alternar entre login e cadastro
 }   
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+const LoginForm: React.FC<LoginFormProps> = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        onLogin(email, password);
+        try {
+            const response = await login(email, password);
+            console.log("Login bem-sucedido:", response);
+            // Você pode redirecionar o usuário ou armazenar o token no localStorage aqui
+        } catch (err) {
+            // Verifica se o erro é uma instância de Error
+            if (err instanceof Error) {
+                setError(err.message || "Erro ao cadastrar.");
+            } else {
+                // Se não for uma instância de Error, tratamos como um erro desconhecido
+                setError("Ocorreu um erro desconhecido durante o cadastro.");
+            }
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}> 
             <input 
             type="email" 
             placeholder="Email" 
@@ -31,10 +45,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             required
             />
             <a href="#">Esqueceu a Senha?</a>
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <button type="submit">Entrar</button>
             <p>Entrar na sua jornada</p>
+            {/* <button type="button" onClick={onToggleMode}>Criar conta</button> */}
         </form>
     );
 };
-
 export default LoginForm;

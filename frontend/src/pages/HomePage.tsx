@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import QuoteCard from '../components/QuoteCard';
 import { FaFire, FaBrain, FaBook } from 'react-icons/fa';
+import { getRandomQuote } from "../services/quoteService";
 import styles from '../styles/HomePage.module.css';
 
 interface Quote {
@@ -14,6 +15,8 @@ const HomePage: React.FC = () => {
   const [selectedMood, setSelectedMood] = useState<string>('Motivado');
   const [quote, setQuote] = useState<Quote>({ text: '', author: '' });
   const [favorites, setFavorites] = useState<Quote[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Novo estado para indicar carregamento
+  const [error, setError] = useState<string | null>(null); // Novo estado para erros
   
   const moods: { name: string; icon: JSX.Element }[] = [
     { name: 'Motivado', icon: <FaFire /> },
@@ -21,35 +24,34 @@ const HomePage: React.FC = () => {
     { name: 'Filosófico', icon: <FaBook /> },
   ];
 
-  const handleMoodChange = (mood: string) => {
+  const handleMoodChange = async (mood: string) => {
     setSelectedMood(mood);
-    generateQuote(mood);
+    await generateQuote(mood);
   };
 
-  const generateQuote = useCallback((mood: string) => {
-    const quotesByMood: { [key: string]: Quote[] } = {
-      Motivado: [
-        { text: 'A persistência é o caminho do êxito.', author: 'Charles Chaplin' },
-        { text: 'O sucesso é a soma de pequenos esforços repetidos dia após dia.', author: 'Robert Collier' },
-      ],
-      Reflexivo: [
-        { text: 'A vida é 10% o que acontece comigo e 90% como eu reajo a isso.', author: 'Charles Swindoll' },
-        { text: 'Conhece-te a ti mesmo e conhecerás o universo.', author: 'Sócrates' },
-      ],
-      Filosófico: [
-        { text: 'Penso, logo existo.', author: 'René Descartes' },
-        { text: 'A única coisa que sei é que nada sei.', author: 'Sócrates' },
-      ],
-    };
+  // Wrap generateQuote com useCallback para evitar recriação desnecessária
+  const generateQuote = useCallback(
+    async (mood: string) => {
+      setLoading(true); // Inicia o estado de carregamento
+      setError(null); // Limpa qualquer erro anterior
 
-    const quotes = quotesByMood[mood];
-    if (quotes && quotes.length > 0) {
-      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      setQuote(randomQuote);
-    } else {
-      setQuote({ text: 'Nenhuma citação disponível para este estado.', author: '' });
-    }
-  }, []);
+      try {
+        console.log(`Fazendo chamada à API com estado: ${mood}`);
+        const response = await getRandomQuote(mood); // Chama o serviço para buscar a citação
+        
+        setQuote({ text: response.text, author: response.author }); // Define a citação retornada pela API
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message || "Erro ao buscar a citação."); // Trata erros da API
+        } else {
+          setError("Erro desconhecido ao buscar a citação.");
+        }
+        setQuote({ text: "", author: "" }); // Reseta a citação em caso de erro
+      } finally {
+        setLoading(false); // Finaliza o estado de carregamento
+      }
+    },    [] // A função não depende de nenhum estado ou propriedade externa
+  );
 
   useEffect(() => {
     generateQuote(selectedMood); // Gera uma citação assim que a página carrega
@@ -81,6 +83,8 @@ const HomePage: React.FC = () => {
         </section>
 
         <section className={styles.quoteSection}>
+          {loading && <p>Carregando citação...</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           {quote.text && (
             <>
               <QuoteCard

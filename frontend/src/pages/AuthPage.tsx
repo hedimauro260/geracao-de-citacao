@@ -22,19 +22,25 @@ const AuthPage: React.FC = () => {
         }
     }, [searchParams]);
 
+    // Função para alternar entre login e cadastro
+    const toggleMode = () => {
+        setIsLogin((prev) => !prev); // Alterna o estado entre true (login) e false (cadastro)
+        updateURL(isLogin ? "signup" : "login"); // Atualiza a URL com base no modo atual
+    };
+
     // Atualiza a URL ao alternar entre login e signup
     const updateURL = (mode: string) => {
         navigate(`?mode=${mode}`, { replace: true });
     };
 
-    // styles do Forms Container
+    // Estilos dinâmicos para o container de formulários
     const formStyles = {
         transform: isLogin ? "translateX(0)" : "translateX(150%)",
         borderRight: isLogin ? "3px solid var(--color-02)" : "none",
         borderLeft: !isLogin ? "3px solid var(--color-02)" : "none",
     };
 
-    // styles do Panel Container
+    // Estilos dinâmicos para o container de painéis
     const panelStyles = {
         transform: isLogin ? "translateX(0)" : "translateX(-60%)",
     };
@@ -61,9 +67,9 @@ const AuthPage: React.FC = () => {
                       <div className={styles.divisor}></div>
                       <div className={styles.formContent} >
                           {isLogin ?
-                          <LoginForm onLogin={(email, password) => console.log(email, password)} />
+                          <LoginForm onToggleMode={toggleMode} />
                           :
-                          <SignupForm onSignup={(name, email, password) => console.log(name, email, password)} />
+                          <SignupForm onToggleMode={toggleMode} />
                           }
                       </div>
                   </div>
