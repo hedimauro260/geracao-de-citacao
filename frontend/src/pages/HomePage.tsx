@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, JSX } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import QuoteCard from '../components/QuoteCard';
-import FavoriteQuotes from '../components/FavoriteQuotes';
+import { FaFire, FaBrain, FaBook } from 'react-icons/fa';
 import styles from '../styles/HomePage.module.css';
 
 interface Quote {
@@ -15,10 +15,10 @@ const HomePage: React.FC = () => {
   const [quote, setQuote] = useState<Quote>({ text: '', author: '' });
   const [favorites, setFavorites] = useState<Quote[]>([]);
   
-  const moods: { name: string; icon: string }[] = [
-    { name: 'Motivado', icon: '💪' },
-    { name: 'Reflexivo', icon: '🤔' },
-    { name: 'Filosófico', icon: '📜' },
+  const moods: { name: string; icon: JSX.Element }[] = [
+    { name: 'Motivado', icon: <FaFire /> },
+    { name: 'Reflexivo', icon: <FaBrain /> },
+    { name: 'Filosófico', icon: <FaBook /> },
   ];
 
   const handleMoodChange = (mood: string) => {
@@ -99,9 +99,6 @@ const HomePage: React.FC = () => {
           )}
         </section>
         <p>Estado atual: {selectedMood || 'Nenhum estado selecionado'}</p>
-        <section className={styles.favoritesSection}>
-          <FavoriteQuotes favorites={favorites} />
-        </section>
 
       </main>
       <Footer />

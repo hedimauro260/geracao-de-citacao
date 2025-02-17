@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import LoginForm from '../components/LoginForm';
 import SignupForm  from '../components/SignupForm';
 import Panels from '../components/Panels';
@@ -29,8 +30,8 @@ const AuthPage: React.FC = () => {
     // styles do Forms Container
     const formStyles = {
         transform: isLogin ? "translateX(0)" : "translateX(150%)",
-        borderRight: isLogin ? "3px solid #7454d9" : "none",
-        borderLeft: !isLogin ? "3px solid #7454d9" : "none",
+        borderRight: isLogin ? "3px solid var(--color-02)" : "none",
+        borderLeft: !isLogin ? "3px solid var(--color-02)" : "none",
     };
 
     // styles do Panel Container
@@ -40,11 +41,14 @@ const AuthPage: React.FC = () => {
 
     return (
         <div className={styles.authPage}>
+            <Helmet>
+                <title>Login / Cadastrar | Anotado.</title>
+            </Helmet>
           <div className={styles.container} >
               {/* Formularios */}
               <div className={styles.formsContainer} style={formStyles} >
                   <div className={styles.formHeader}>
-                      <h2><span>"</span>Citações Diarias</h2>
+                      <h2><span>"</span>Citações Diárias</h2>
                       <p>"Onde suas palavras favoritas ganham vida"</p>
                       <div className={styles.toggleButtons}>
                           <button className={`${styles.toggleButton} ${isLogin ? styles.active : ''}`} onClick={() => {setIsLogin(true); updateURL('login');}}>

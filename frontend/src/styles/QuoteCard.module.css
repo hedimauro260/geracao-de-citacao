@@ -1,39 +1,43 @@
 .quoteCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    width: 600px;
-    height: 200px;
-    background-color: #333;
-    border: 1px solid #333;
-    border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  width: 600px;
+  min-height: 200px;
+  background-color: var(--color-02);
+  border: 1px solid var(--color-04);
+  border-radius: 6px;
 }
 
 .quoteText {
-    text-align: left;
-    color: #fff;
-    font-size: 2rem;
+  text-align: left;
+  color: var(--color-01);
+  font-size: 2rem;
 }
 
 .quoteAuthor {
-    text-align: right;
-    color: #cccccc;
-    font-size: 1.5rem;
+  text-align: right;
+  color: var(--color-05);
+  font-size: 1.5rem;
 }
 
 .quoteActions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  
-  .actionButton {
-    background-color: transparent;
-    color: #cccccc;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 2rem;
-  }
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.actionButton {
+  background-color: transparent;
+  color: var(--color-05);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.actionButton:hover {
+  color: var(--color-01);
+}

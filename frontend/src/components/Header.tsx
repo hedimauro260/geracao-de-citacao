@@ -19,7 +19,7 @@ const Header: React.FC = () => {
                 </ul>
             </div>
             <div className={styles.login}>
-                <Link to='/auth'><FaUser />Login</Link>
+                <Link to='/auth'><FaUser />Entrar | Cadastrar</Link>
             </div>
         </header>
     );

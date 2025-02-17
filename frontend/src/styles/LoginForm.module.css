@@ -15,15 +15,14 @@
     border-radius: 10px;
     outline: none;
     font-size: 14px;
-    color: #7454d9;
+    color: var(--color-02);
 }
 
 .form input:focus {
-    border: 1px solid #7454d9;
+    border: 1px solid var(--color-02);
 }
 
 .form a {
-    /* margin-top: 10px; */
     display: flex;
     align-self: end;
     font-size: 14px;
@@ -35,7 +34,7 @@
     width: 60%;
     padding: 10px;
     margin: 20px 0;
-    background-color: #7454d9;
+    background-color: var(--color-02);
     border: none;
     border-radius: 5px;
     color: #fff;
