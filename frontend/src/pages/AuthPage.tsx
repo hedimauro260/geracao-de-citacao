@@ -33,6 +33,12 @@ const AuthPage: React.FC = () => {
         navigate(`?mode=${mode}`, { replace: true });
     };
 
+    // Função para redirecionar para HomePage após login
+  const handleLoginSuccess = () => {
+    navigate('/'); // Redireciona para a HomePage
+    window.dispatchEvent(new Event('login')); // Dispara um evento global para atualizar o Header
+  };
+
     // Estilos dinâmicos para o container de formulários
     const formStyles = {
         transform: isLogin ? "translateX(0)" : "translateX(150%)",
@@ -67,7 +73,7 @@ const AuthPage: React.FC = () => {
                       <div className={styles.divisor}></div>
                       <div className={styles.formContent} >
                           {isLogin ?
-                          <LoginForm onToggleMode={toggleMode} />
+                          <LoginForm onToggleMode={toggleMode} onLoginSuccess={handleLoginSuccess} />
                           :
                           <SignupForm onToggleMode={toggleMode} />
                           }

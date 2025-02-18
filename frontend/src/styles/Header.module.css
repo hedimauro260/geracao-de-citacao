@@ -25,7 +25,7 @@
 
 .navbar ul li a {
     display: inline-block;
-    width: 10rem;
+    width: 14rem;
     text-align: center;
     padding: 0.6rem 0;
     border: 1px solid var(--color-04);
@@ -54,3 +54,59 @@
     color: var(--color-02);
     
 }
+
+/* Estilo para o avatar do usuário */
+.userAvatar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 15px;
+    border-radius: 5px;
+    background-color: var(--color-02);
+    color: var(--color-01);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .userAvatar:hover {
+    background-color: var(--color-04);
+  }
+  
+  /* Estilo para o menu suspenso */
+  .menuDropdown {
+    position: absolute;
+    top: 45px; /* Posiciona o menu abaixo do avatar */
+    right: 60px; /* Alinha o menu à direita */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    width: 200px;
+  }
+  
+  .menuDropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menuDropdown li {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+  
+  .menuDropdown li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .logout {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logout p {
+    font-size: 1.4rem;
+  }

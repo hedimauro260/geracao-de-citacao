@@ -4,9 +4,10 @@ import styles from '../styles/LoginForm.module.css';
 
 interface LoginFormProps {
     onToggleMode: () => void; // Propriedade para alternar entre login e cadastro
+    onLoginSuccess?: () => void; // Propriedade para lidar com o sucesso do login
 }   
 
-const LoginForm: React.FC<LoginFormProps> = () => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -17,6 +18,10 @@ const LoginForm: React.FC<LoginFormProps> = () => {
             const response = await login(email, password);
             console.log("Login bem-sucedido:", response);
             // Você pode redirecionar o usuário ou armazenar o token no localStorage aqui
+            // Chama a função de sucesso do login (se fornecida)
+            if (onLoginSuccess) {
+                onLoginSuccess();
+            }
         } catch (err) {
             // Verifica se o erro é uma instância de Error
             if (err instanceof Error) {

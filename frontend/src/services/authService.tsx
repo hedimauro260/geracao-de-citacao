@@ -7,5 +7,14 @@ export const signup = async (username: string, email: string, password: string) 
 
 export const login = async (email: string, password: string) => {
     const response = await api.post('/auth/login', { email, password });
+    const { token } = response.data;
+
+    // Armazena o token no localStorage
+    localStorage.setItem('authToken', token);
     return response.data;
+};
+
+export const logout = () => {
+    // Remove o token do localStorage
+    localStorage.removeItem('authToken');
 };

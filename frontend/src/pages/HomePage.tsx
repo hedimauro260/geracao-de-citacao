@@ -2,7 +2,10 @@ import { useState, useEffect, useCallback, JSX } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import QuoteCard from '../components/QuoteCard';
-import { FaFire, FaBrain, FaBook } from 'react-icons/fa';
+import { FaFire, FaBrain, FaBook, FaHeart, FaSmile, FaBolt, FaSadTear } from 'react-icons/fa';
+import { AiOutlineHourglass } from "react-icons/ai";
+import { GiPartyPopper } from "react-icons/gi";
+import { BiLeaf } from "react-icons/bi";
 import { getRandomQuote } from "../services/quoteService";
 import styles from '../styles/HomePage.module.css';
 
@@ -22,6 +25,13 @@ const HomePage: React.FC = () => {
     { name: 'Motivado', icon: <FaFire /> },
     { name: 'Reflexivo', icon: <FaBrain /> },
     { name: 'Filosófico', icon: <FaBook /> },
+    { name: 'Feliz', icon: <FaSmile /> },
+    { name: 'Ansioso', icon: <AiOutlineHourglass /> },
+    { name: 'Irritado', icon: <FaBolt /> },
+    { name: 'Triste', icon: <FaSadTear /> },
+    { name: 'Eufórico', icon: <GiPartyPopper /> },
+    { name: 'Apaixonado', icon: <FaHeart /> },
+    { name: 'Calmo', icon: <BiLeaf /> },
   ];
 
   const handleMoodChange = async (mood: string) => {
