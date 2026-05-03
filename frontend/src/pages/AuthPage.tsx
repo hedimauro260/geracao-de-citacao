@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import LoginForm from '../components/LoginForm';
-import SignupForm  from '../components/SignupForm';
+import SignupForm from '../components/SignupForm';
 import Panels from '../components/Panels';
 import styles from '../styles/AuthPage.module.css'
 
@@ -16,9 +16,9 @@ const AuthPage: React.FC = () => {
     useEffect(() => {
         const mode = searchParams.get('mode');
         if (mode === 'signup') {
-        setIsLogin(false);
+            setIsLogin(false);
         } else {
-        setIsLogin(true);
+            setIsLogin(true);
         }
     }, [searchParams]);
 
@@ -34,10 +34,10 @@ const AuthPage: React.FC = () => {
     };
 
     // Função para redirecionar para HomePage após login
-  const handleLoginSuccess = () => {
-    navigate('/'); // Redireciona para a HomePage
-    window.dispatchEvent(new Event('login')); // Dispara um evento global para atualizar o Header
-  };
+    const handleLoginSuccess = () => {
+        navigate('/'); // Redireciona para a HomePage
+        window.dispatchEvent(new Event('login')); // Dispara um evento global para atualizar o Header
+    };
 
     // Estilos dinâmicos para o container de formulários
     const formStyles = {
@@ -56,35 +56,35 @@ const AuthPage: React.FC = () => {
             <Helmet>
                 <title>Login / Cadastrar | Anotado.</title>
             </Helmet>
-          <div className={styles.container} >
-              {/* Formularios */}
-              <div className={styles.formsContainer} style={formStyles} >
-                  <div className={styles.formHeader}>
-                      <h2><span>"</span>Citações Diárias</h2>
-                      <p>"Onde suas palavras favoritas ganham vida"</p>
-                      <div className={styles.toggleButtons}>
-                          <button className={`${styles.toggleButton} ${isLogin ? styles.active : ''}`} onClick={() => {setIsLogin(true); updateURL('login');}}>
-                              Entrar
-                          </button>
-                          <button className={`${styles.toggleButton} ${!isLogin ? styles.active : ''}`} onClick={() => {setIsLogin(false); updateURL('signup');}}>
-                              Cadastrar
-                          </button>
-                      </div>
-                      <div className={styles.divisor}></div>
-                      <div className={styles.formContent} >
-                          {isLogin ?
-                          <LoginForm onToggleMode={toggleMode} onLoginSuccess={handleLoginSuccess} />
-                          :
-                          <SignupForm onToggleMode={toggleMode} />
-                          }
-                      </div>
-                  </div>
-              </div>
-              {/* Paineis */}
-              <div className={styles.panelContainer} style={panelStyles}>
-                  <Panels isLogin={isLogin}/>
-              </div>
-          </div>
+            <div className={styles.container} >
+                {/* Formularios */}
+                <div className={styles.formsContainer} style={formStyles} >
+                    <div className={styles.formHeader}>
+                        <h2><span>"</span>Citações Diárias</h2>
+                        <p>"Onde suas palavras favoritas ganham vida"</p>
+                        <div className={styles.toggleButtons}>
+                            <button className={`${styles.toggleButton} ${isLogin ? styles.active : ''}`} onClick={() => { setIsLogin(true); updateURL('login'); }}>
+                                Entrar
+                            </button>
+                            <button className={`${styles.toggleButton} ${!isLogin ? styles.active : ''}`} onClick={() => { setIsLogin(false); updateURL('signup'); }}>
+                                Cadastrar
+                            </button>
+                        </div>
+                        <div className={styles.divisor}></div>
+                        <div className={styles.formContent} >
+                            {isLogin ?
+                                <LoginForm onToggleMode={toggleMode} onLoginSuccess={handleLoginSuccess} />
+                                :
+                                <SignupForm onToggleMode={toggleMode} />
+                            }
+                        </div>
+                    </div>
+                </div>
+                {/* Paineis */}
+                <div className={styles.panelContainer} style={panelStyles}>
+                    <Panels isLogin={isLogin} />
+                </div>
+            </div>
         </div>
     );
 };

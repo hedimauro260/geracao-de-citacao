@@ -1,0 +1,16 @@
+{
+  "name": "geracao-de-citacao",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
+    "husky": "^9.1.7",
+    "standard-version": "^9.5.0"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "test": "echo \"No tests yet\" && exit 0",
+    "release": "standard-version"
+  }
+}

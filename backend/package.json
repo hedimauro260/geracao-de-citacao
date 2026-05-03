@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "backend-geracao-de-citacao",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
